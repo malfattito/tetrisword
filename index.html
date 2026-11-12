@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>tetrisword</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Jogo de blocos com letras: forme palavras em português e elas somem.">
+<meta name="theme-color" content="#110f17">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+</head>
+<body>
+<div class="app" data-app data-phase="ready">
+  <header class="topbar">
+    <h1 class="brand" aria-label="tetrisword"><span class="brand__tile">T</span>etris<span class="brand__word">word</span></h1>
+    <dl class="stats">
+      <div class="stat"><dt>Pontos</dt><dd data-stat="score">0</dd></div>
+      <div class="stat"><dt>Nível</dt><dd data-stat="level">1</dd></div>
+      <div class="stat"><dt>Palavras</dt><dd data-stat="words">0</dd></div>
+      <div class="stat stat--best"><dt>Recorde</dt><dd data-stat="best">0</dd></div>
+    </dl>
+    <button class="icon-btn" type="button" data-command="togglePause" aria-label="Pausar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+    </button>
+  </header>
+
+  <main class="stage">
+    <section class="panel panel--next" aria-label="Próximas peças">
+      <h2 class="panel__label">Próximas</h2>
+      <canvas class="preview" data-preview aria-hidden="true"></canvas>
+    </section>
+
+    <section class="well" aria-label="Tabuleiro">
+      <div class="well__frame">
+        <canvas class="board" data-board role="img" aria-label="Tabuleiro do jogo"></canvas>
+        <div class="toasts" data-toasts aria-live="polite"></div>
+        <div class="overlay" data-overlay data-mode="loading">
+          <div class="overlay__card">
+            <h2 class="overlay__title" data-overlay-title>tetrisword</h2>
+            <p class="overlay__message" data-overlay-message>Carregando dicionário…</p>
+            <ul class="overlay__rules">
+              <li>Palavras de <b>3+ letras</b> na horizontal <b>→</b> ou vertical <b>↓</b> somem.</li>
+              <li>A palavra mais longa vence. Linha completa também some.</li>
+              <li>Acentos não importam: CORACAO vale CORAÇÃO. <b>Q</b> vem sempre como <b>Qu</b>.</li>
+            </ul>
+            <button class="cta" type="button" data-overlay-action hidden>Jogar</button>
+            <p class="overlay__hint overlay__hint--touch">Arraste para mover · toque para girar · deslize para baixo para soltar</p>
+            <p class="overlay__hint overlay__hint--keys">← → mover · ↑ ou X girar · Z girar ao contrário · ↓ descer · Espaço soltar · P pausar</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel--log" aria-label="Palavras formadas">
+      <h2 class="panel__label">Palavras formadas</h2>
+      <p class="log-empty" data-word-log-empty>As palavras que você formar aparecem aqui.</p>
+      <ol class="word-log" data-word-log></ol>
+    </section>
+  </main>
+
+  <nav class="controls" aria-label="Controles">
+    <button type="button" class="ctl" data-command="moveLeft" aria-label="Mover para a esquerda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button type="button" class="ctl" data-command="rotateCw" aria-label="Girar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12a7 7 0 1 1-2.05-4.95"/><path d="M19 4v4h-4"/></svg></button>
+    <button type="button" class="ctl" data-command="moveRight" aria-label="Mover para a direita"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    <button type="button" class="ctl" data-command="softDrop" aria-label="Descer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v13"/><path d="M6 12l6 6 6-6"/></svg></button>
+    <button type="button" class="ctl ctl--drop" data-command="hardDrop" aria-label="Soltar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l6 6 6-6"/><path d="M6 12l6 6 6-6"/><path d="M5 21h14"/></svg></button>
+  </nav>
+</div>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
